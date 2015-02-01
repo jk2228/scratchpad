@@ -5,6 +5,6 @@
 
 .focus-on #post-body .scratchpad {
 	opacity: 1;
-	//height: auto;
+	height: auto;
 	//transition-property: height;
 }
