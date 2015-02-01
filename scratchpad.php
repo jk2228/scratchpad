@@ -8,6 +8,12 @@
  * Author URI: http://example.com/make-scratchpad
  */
 
+add_action( 'admin_init', 'scratchpad_init' );
+
+function scratchpad_init() {
+    wp_enqueue_script( 'editor-expand-scratchpad', plugins_url( 'expand-editor-scratchpad.js', __FILE__ ),
+        array( 'jquery' , 'editor-expand') );
+}
 
 /* Fire our meta box setup function on the post editor screen. */
 add_action( 'load-post.php', 'scratchpad_setup' );

@@ -45,16 +45,6 @@ function fadeOut( event ) {
                 $window.on( 'scroll.focus', function() {
                     var nScrollY = window.pageYOffset;
 
-                    if ( (
-                        scrollY && mouseY &&
-                        scrollY !== nScrollY
-                        ) && (
-                        mouseY < editorRect.top - buffer ||
-                        mouseY > editorRect.bottom + buffer
-                        ) ) {
-                        //fadeIn();
-                    }
-
                     scrollY = nScrollY;
                 } );
             } )
@@ -64,49 +54,7 @@ function fadeOut( event ) {
 
                 $window.off( 'scroll.focus' );
             } )
-            /*
-             // Fade in when the mouse moves away form the editor area.
-             .on( 'mousemove.focus', function( event ) {
-             var nx = event.clientX,
-             ny = event.clientY,
-             pageYOffset = window.pageYOffset,
-             pageXOffset = window.pageXOffset;
 
-             if ( x && y && ( nx !== x || ny !== y ) ) {
-             if (
-             ( ny <= y && ny < editorRect.top - pageYOffset ) ||
-             ( ny >= y && ny > editorRect.bottom - pageYOffset ) ||
-             ( nx <= x && nx < editorRect.left - pageXOffset ) ||
-             ( nx >= x && nx > editorRect.right - pageXOffset )
-             ) {
-             traveledX += Math.abs( x - nx );
-             traveledY += Math.abs( y - ny );
-
-             if ( (
-             ny <= editorRect.top - buffer - pageYOffset ||
-             ny >= editorRect.bottom + buffer - pageYOffset ||
-             nx <= editorRect.left - buffer - pageXOffset ||
-             nx >= editorRect.right + buffer - pageXOffset
-             ) && (
-             traveledX > 10 ||
-             traveledY > 10
-             ) ) {
-             fadeIn();
-
-             x = y =  null;
-             traveledX = traveledY = 0;
-
-             return;
-             }
-             } else {
-             traveledX = traveledY = 0;
-             }
-             }
-
-             x = nx;
-             y = ny;
-             } )
-             */
             // When the overlay is touched, always fade in and cancel the event.
             .on( 'touchstart.focus', function( event ) {
                 event.preventDefault();
