@@ -1,3 +1,10 @@
-#fishy {
-	position: absolute;
+.scratchpad, .focus-off #post-body .scratchpad {
+	opacity: 0;
+	height: 0;
+}
+
+.focus-on #post-body .scratchpad {
+	opacity: 1;
+	//height: auto;
+	//transition-property: height;
 }

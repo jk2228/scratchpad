@@ -13,11 +13,16 @@ add_action( 'admin_init', 'scratchpad_init' );
 function scratchpad_init() {
     wp_enqueue_script( 'editor-expand-scratchpad', plugins_url( 'expand-editor-scratchpad.js', __FILE__ ),
         array( 'jquery' , 'editor-expand') );
+    wp_enqueue_style( 'scratchpad_css', plugins_url( 'scratchpad.css', __FILE__ ));
+
 }
+
 
 /* Fire our meta box setup function on the post editor screen. */
 add_action( 'load-post.php', 'scratchpad_setup' );
 add_action( 'load-post-new.php', 'scratchpad_setup' );
+
+add_action( 'submitpost_box', 'scratchpad_add');
 
 
 /* Meta box setup function. */
@@ -49,12 +54,13 @@ function scratchpad_post_callback( $object, $box ) {
     $meta_value = get_post_meta( $post_id, $meta_key, true );
     ?>
 
-    <p>
+    <p class = "scratchpad">
         <label for="scratchpad-class"><?php _e( "Use this as a scratchpad for composing your post"); ?></label>
         <br />
         <textarea class="widefat" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php
-        echo esc_attr( get_post_meta( $object->ID, 'scratchpad-class', true ) ); ?>" rows="15" ><?php echo ($meta_value);?></textarea>
+        echo esc_attr( get_post_meta( $post_id, 'scratchpad-class', true ) ); ?>" rows="15" ><?php echo ($meta_value);?></textarea>
     </p>
+
 <?php }
 
 /* Save the post meta box */
