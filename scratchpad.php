@@ -13,12 +13,12 @@
 add_action( 'load-post.php', 'scratchpad_setup' );
 add_action( 'load-post-new.php', 'scratchpad_setup' );
 
+
 /* Meta box setup function. */
 function scratchpad_setup() {
 
     /* Add meta boxes on the 'add_meta_boxes' hook. */
     add_action( 'add_meta_boxes', 'scratchpad_add' );
-
     /* Save post meta on the 'save_post' hook. */
     add_action( 'save_post', 'scratchpad_save', 10, 2 );
 }
@@ -35,12 +35,19 @@ function scratchpad_add() {
 /* Display the post meta box. */
 function scratchpad_post_callback( $object, $box ) {
 
-    wp_nonce_field( basename( __FILE__ ), 'scratchpad_nonce' ); ?>
+    wp_nonce_field( basename( __FILE__ ), 'scratchpad_nonce' );
+    /* Get the meta value of the custom field key. */
+
+    $post_id = (isset($_GET['post'])) ? sanitize_html_class($_GET['post']) : '';
+    $meta_key = 'scratchpad-class';
+    $meta_value = get_post_meta( $post_id, $meta_key, true );
+    ?>
 
     <p>
         <label for="scratchpad-class"><?php _e( "Use this as a scratchpad for composing your post"); ?></label>
         <br />
-        <textarea class="widefat" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php echo esc_attr( get_post_meta( $object->ID, 'scratchpad-class', true ) ); ?>" rows="15" ></textarea>
+        <textarea class="widefat" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php 
+        echo esc_attr( get_post_meta( $object->ID, 'scratchpad-class', true ) ); ?>" rows="15" ><?php echo ($meta_value);?></textarea>
     </p>
 <?php }
 
@@ -63,7 +70,7 @@ function scratchpad_save($post_id, $post)
     $new_meta_value = (isset($_POST['scratchpad-class']) ? sanitize_html_class($_POST['scratchpad-class']) : '');
 
     /* Get the meta key. */
-    $meta_key = 'scratchpad_class';
+    $meta_key = 'scratchpad-class';
 
     /* Get the meta value of the custom field key. */
     $meta_value = get_post_meta( $post_id, $meta_key, true );
