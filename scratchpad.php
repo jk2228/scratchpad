@@ -46,7 +46,7 @@ function scratchpad_post_callback( $object, $box ) {
     <p>
         <label for="scratchpad-class"><?php _e( "Use this as a scratchpad for composing your post"); ?></label>
         <br />
-        <textarea class="widefat" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php 
+        <textarea class="widefat" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php
         echo esc_attr( get_post_meta( $object->ID, 'scratchpad-class', true ) ); ?>" rows="15" ><?php echo ($meta_value);?></textarea>
     </p>
 <?php }
