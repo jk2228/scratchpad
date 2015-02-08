@@ -8,6 +8,7 @@
 	height: auto;
 	margin-left: -20px;
 	padding: 20px;
+	padding-right: 10px;
 	padding-left: 50px;
 	//transition-property: height;
 	background-image: url("notepad.png");
