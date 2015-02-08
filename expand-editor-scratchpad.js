@@ -1,8 +1,7 @@
 /**
- * Created by kristin on 2/1/15.
- * Scratchpad Expand editor
- */
-
+ * Overrides editor-expand.js
+ * Hovering or clicking outside the editor in Distraction free mode does not fadeIn()
+ **/
 function fadeOut( event ) {
     var key = event && event.keyCode;
 

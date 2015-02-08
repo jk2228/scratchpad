@@ -1,11 +1,11 @@
 <?php
 /*
  * Plugin Name: Scratchpad
- * Plugin URI: http://example.com/scratchpad
- * Description: Scratchpad for next to your post
+ * Plugin URI: https://github.com/jk2228/wordpress-scratchpad
+ * Description: Scratchpad to assist composing a new post, displayed next to the editor
  * Author: Cornell FBOA
  * Version: 0.1
- * Author URI: http://example.com/make-scratchpad
+ * Author URI: http://example.com/make-scratchpad ?? ASK
  */
 
 add_action( 'admin_init', 'scratchpad_init' );
@@ -14,18 +14,15 @@ function scratchpad_init() {
     wp_enqueue_script( 'editor-expand-scratchpad', plugins_url( 'expand-editor-scratchpad.js', __FILE__ ),
         array( 'jquery' , 'editor-expand') );
     wp_enqueue_style( 'scratchpad_css', plugins_url( 'scratchpad.css', __FILE__ ));
-
 }
-
 
 /* Fire our meta box setup function on the post editor screen. */
 add_action( 'load-post.php', 'scratchpad_setup' );
 add_action( 'load-post-new.php', 'scratchpad_setup' );
-
 add_action( 'submitpost_box', 'scratchpad_add');
 
 
-/* Meta box setup function. */
+/* Scratchpad box setup function. */
 function scratchpad_setup() {
 
     /* Add meta boxes on the 'add_meta_boxes' hook. */
@@ -34,7 +31,7 @@ function scratchpad_setup() {
     add_action( 'save_post', 'scratchpad_save', 10, 2 );
 }
 
-/* Create one or more meta boxes to be displayed on the post editor screen. */
+/* Create the scratchpad box displayed next to the editor in distraction free mode. */
 function scratchpad_add() {
 
     wp_nonce_field( basename( __FILE__ ), 'scratchpad_nonce' );
@@ -54,7 +51,7 @@ function scratchpad_add() {
 
 <?php }
 
-/* Save the post meta box */
+/* Save the scratchpad notes box */
 function scratchpad_save($post_id, $post)
 {
 
