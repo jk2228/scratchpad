@@ -42,10 +42,8 @@ function scratchpad_add() {
     $meta_value = get_post_meta( $post_id, $meta_key, true );
     ?>
     <p class = "scratchpad">
-        <label for="scratchpad-class"><?php _e( "Use this as a scratchpad for composing your post"); ?></label>
-        <br />
-        <textarea class="widefat" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php
-        echo esc_attr( get_post_meta( $post_id, 'scratchpad-class', true ) ); ?>" rows="15" ><?php echo esc_textarea($meta_value);?></textarea>
+        <textarea class="widefat scratchpad-box" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php
+        echo esc_attr( get_post_meta( $post_id, 'scratchpad-class', true ) ); ?>" rows="26" ><?php echo esc_textarea($meta_value);?></textarea>
     </p>
 
 
