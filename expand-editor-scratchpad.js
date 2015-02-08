@@ -2,6 +2,7 @@
  * Created by kristin on 2/1/15.
  * Scratchpad Expand editor
  */
+
 function fadeOut( event ) {
     var key = event && event.keyCode;
 
@@ -62,6 +63,7 @@ function fadeOut( event ) {
             } );
 
         $editor.off( 'mouseenter.focus' );
+        $editor.off( 'blur', maybeFadeIn );
 
         if ( focusLostTimer ) {
             clearTimeout( focusLostTimer );
@@ -73,4 +75,54 @@ function fadeOut( event ) {
 
     fadeOutAdminBar();
     fadeOutSlug();
+
+
+
 }
+
+
+window.jQuery( document ).on( 'tinymce-editor-init.focus', function( event, editor ) {
+    var mceBind, mceUnbind;
+
+    function focus() {
+        editorHasFocus = true;
+    }
+
+    function blur() {
+        editorHasFocus = false;
+    }
+
+    if ( editor.id === 'content' ) {
+        $editorWindow = $( editor.getWin() );
+        $editorIframe = $( editor.getContentAreaContainer() ).find( 'iframe' );
+
+        mceBind = function() {
+            editor.on( 'keydown', fadeOut );
+           // editor.on( 'blur', maybeFadeIn );
+            editor.on( 'focus', focus );
+            editor.on( 'blur', blur );
+            editor.on( 'wp-autoresize', recalcEditorRect );
+        };
+
+        mceUnbind = function() {
+            editor.off( 'keydown', fadeOut );
+           // editor.off( 'blur', maybeFadeIn );
+            editor.off( 'focus', focus );
+            editor.off( 'blur', blur );
+            editor.off( 'wp-autoresize', recalcEditorRect );
+        };
+
+        if ( _isOn ) {
+            mceBind();
+        }
+
+        window.jQuery( document ).on( 'dfw-on.focus', mceBind ).on( 'dfw-off.focus', mceUnbind );
+
+        // Make sure the body focuses when clicking outside it.
+        editor.off( 'click', function( event ) {
+            if ( event.target === editor.getDoc().documentElement ) {
+                editor.focus();
+            }
+        } );
+    }
+} );
