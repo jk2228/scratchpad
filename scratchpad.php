@@ -11,7 +11,6 @@
 add_action( 'admin_init', 'scratchpad_init' );
 
 function scratchpad_init() {
-    wp_dequeue_script('editor-expand');
     wp_deregister_script('editor-expand');
     wp_enqueue_script( 'editor-expand-scratchpad', plugins_url( 'expand-editor-scratchpad.js', __FILE__ ),
         array( 'jquery') );
