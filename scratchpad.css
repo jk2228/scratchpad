@@ -11,7 +11,7 @@
 	padding-right: 10px;
 	padding-left: 50px;
 	//transition-property: height;
-	background-image: url("notepad.png");
+	background-image: url("assets/notepad.png");
 }
 
 .scratchpad-box {

@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Scratchpad
- * Plugin URI: https://github.com/jk2228/wordpress-scratchpad
+ * Plugin URI: https://github.com/jk2228/scratchpad
  * Description: Scratchpad to assist composing a new post, displayed next to the editor
  * Author: Cornell FBOA
  * Version: 0.1
@@ -43,10 +43,10 @@ function scratchpad_add() {
     $meta_key = 'scratchpad-class';
     $meta_value = get_post_meta( $post_id, $meta_key, true );
     ?>
-    <p class = "scratchpad">
+    <div class = "scratchpad">
         <textarea class="widefat scratchpad-box" type="text" name="scratchpad-class" id="scratchpad-class" value="<?php
         echo esc_attr( get_post_meta( $post_id, 'scratchpad-class', true ) ); ?>" rows="26" ><?php echo esc_textarea($meta_value);?></textarea>
-    </p>
+    </div>
 
 
 <?php }
