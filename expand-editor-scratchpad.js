@@ -1,3 +1,7 @@
+/* Replication of editor-expand with some tweakes to allow the user to write on the scratchpad
+* without leaving distraction free mode. Removed the maybeFadeIn function to accomplish this
+*/
+
 ( function( window, $, undefined ) {
     'use strict';
 
